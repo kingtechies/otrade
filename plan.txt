@@ -1,0 +1,34 @@
+i want to build a trading bot 
+
+
+but this is the plan
+
+
+first we are to self host mt5 or mt4
+
+so we use code to execute mt5 or mt4
+
+
+the brain of the bot is openai api.
+
+
+also write 5 top stragies, so the bot follows the stragies only
+
+
+so, the the bot will login the live account of my exness from .env
+
+so it will login the account on mt5 that is self hosted, and can read the tradde in real time and excute in real time
+
+also i can put the bankroll i mean the amount and then the target
+
+let me say i tell the bot that trade $10 trade it to 3month,
+
+so the bot will trade it exute take profit , re-enter market and all that and make sure it reach target,
+
+also create a model that learn the market as it trade
+so with that it will make it exceptional good in that market.
+
+but this bot is endless so it run for ever
+
+and this is real time trade 
+

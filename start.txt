@@ -1,0 +1,98 @@
+# OTRADE - Ultra Advanced AI Trading Bot
+
+## Quick Start
+
+### 1. Setup Virtual Environment
+```bash
+cd /home/jeph/otrade
+source venv/bin/activate
+```
+
+### 2. Configure Credentials
+```bash
+cp .env.example .env
+nano .env
+```
+
+Fill in:
+- MT5_LOGIN (your Exness account number)
+- MT5_PASSWORD (your password)
+- MT5_SERVER (Exness-MT5Real or Exness-MT5Trial)
+- OPENAI_API_KEY (your OpenAI key)
+
+### 3. Start Wine MT5 Server
+In a separate terminal:
+```bash
+# Install MT5 via Wine first, then:
+WINEPREFIX=~/.wine64 wine64 ~/.wine64/drive_c/Program\ Files/MetaTrader\ 5/terminal64.exe
+
+# Start Python bridge in Wine:
+WINEPREFIX=~/.wine64 wine64 python -c "
+import rpyc
+from rpyc.utils.server import ThreadedServer
+from rpyc import SlaveService
+s = ThreadedServer(SlaveService, port=18812)
+s.start()
+"
+```
+
+### 4. Run the Bot
+```bash
+python main.py
+```
+
+## Architecture
+
+```
+OTRADE BRAIN
+    |
+    +-- Neural Brain (neural_brain.py)
+    |   - Self-learning from trades
+    |   - Pattern recognition
+    |   - ML-based outcome prediction
+    |   - Strategy weight adjustment
+    |
+    +-- Multi-Timeframe Analyzer (mtf_analyzer.py)
+    |   - M1 to MN1 analysis
+    |   - Market regime detection
+    |   - Trend/momentum/volatility
+    |
+    +-- AI Decision Engine (ai_brain.py)
+    |   - GPT-4o integration
+    |   - Full market awareness
+    |   - Dynamic lot sizing
+    |
+    +-- Risk Manager (risk_manager.py)
+    |   - Position sizing
+    |   - Loss protection
+    |   - Trade logging
+    |
+    +-- 10 Trading Strategies (strategies/)
+        - MA Crossover
+        - RSI Reversal
+        - Bollinger Bands
+        - MACD Momentum
+        - S/R Breakout
+        - EMA Ribbon
+        - Stochastic
+        - ATR Breakout
+        - Ichimoku
+        - VWAP
+```
+
+## Features
+
+- Multi-timeframe analysis (1min to 1month)
+- Self-learning neural brain
+- Pattern recognition and memory
+- ML-based trade prediction
+- 10 technical strategies
+- GPT-4o decision engine
+- Dynamic position sizing
+- Endless trading (runs forever)
+- Target: $10 to $10,000+
+
+## Databases
+
+- brain.db: Learning patterns and insights
+- trades.db: Trade history and performance

@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mt5:
+    image: gmag11/metatrader5-docker:latest
+    container_name: otrade-mt5
+    restart: unless-stopped
+    ports:
+      # VNC web access - access MT5 GUI via browser at http://localhost:6080
+      - "6080:6080"
+      # RPyC server - for Python bot connection
+      - "18812:18812"
+      # VNC direct access
+      - "5900:5900"
+    environment:
+      # VNC password for security
+      - VNC_PW=otrade2024
+      # MetaTrader settings
+      - MT_LOGIN=${MT5_LOGIN}
+      - MT_PASSWORD=${MT5_PASSWORD}
+      - MT_SERVER=${MT5_SERVER}
+    volumes:
+      # Persist MT5 data
+      - mt5_data:/root/.wine/drive_c/Program Files/MetaTrader 5
+      - mt5_config:/root/.wine/drive_c/users/root/AppData/Roaming/MetaQuotes
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6080"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+volumes:
+  mt5_data:
+  mt5_config:
